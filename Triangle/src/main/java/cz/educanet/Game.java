@@ -5,21 +5,21 @@ import org.lwjgl.opengl.GL33;
 import org.lwjgl.system.MemoryUtil;
 
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
 
 public class Game {
 
-    private static final float[] vertices = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.5f, 0.5f, 0.0f,
-            -0.5f, -0.5f, 0.0f,
-            -0.5f, 0.5f, 0.0f,
-            0.5f, 0.5f, 0.0f
-    };
+    private static float[] vertices = new float[18*900];
     private static int triangleVaoId;
     private static int triangleVboId;
 
-    public static void init(long window) {
+    public static void init() {
+        Square square = new Square();
+        int index = 0;
+        for(Float element: square.getSquareVertices()){
+            vertices[index++] = element;
+            System.out.println(vertices[index - 1]);
+        }
         // Setup shaders
         Shaders.initShaders();
 
@@ -45,13 +45,13 @@ public class Game {
         MemoryUtil.memFree(fb);
     }
 
-    public static void render(long window) {
+    public static void render() {
         GL33.glUseProgram(Shaders.shaderProgramId);
         GL33.glBindVertexArray(triangleVaoId);
         GL33.glDrawArrays(GL33.GL_TRIANGLES, 0, vertices.length / 3);
     }
 
-    public static void update(long window) {
+    public static void update() {
     }
 
 }
