@@ -36,28 +36,18 @@ public class Square {
 			"110011111001011111111101111111";
 
 	String[] singleValues = gridValues.split("");
-
-	float[] vertices2 = {
-			//x,y,z
-			-0.5f, 1f, 0.0f,//top left
-			1f, 1f, 0.0f,//top right
-			-1f, -1f, 0.0f,//bottom left
-
-			-0.5f, -0.5f, 0.0f,//top right
-			-0.5f, 0.5f, 0.0f,//bottom right
-			0.5f, 0.5f, 0.0f//bottom left
-	};
 	ArrayList<Float> vertices = new ArrayList<>();
 
 	public Square() {
 		int position = 0;
-		float sideLength = (float) (2/(Math.sqrt(singleValues.length)));
+		float elementsPerSide = (float) Math.sqrt(singleValues.length);
+		float elementSideLength = (float) (2/elementsPerSide);
 		float topY = 1;
-		float bottomY = 1 - sideLength;
-		float rightX = -1 + sideLength;
+		float bottomY = 1 - elementSideLength;
+		float rightX = -1 + elementSideLength;
 		float leftX = -1;
-		for(float row = 0; row < 30; row++){
-			for(float column = 0; column < 30; column++){
+		for(float row = 0; row < elementsPerSide; row++){
+			for(float column = 0; column < elementsPerSide; column++){
 				if (singleValues[position].equals("0")){
 					insertVertex(leftX,topY);//top left
 					insertVertex(rightX,topY);//top right
@@ -69,13 +59,13 @@ public class Square {
 
 				}
 				position++;
-				leftX += sideLength;
-				rightX += sideLength;
+				leftX += elementSideLength;
+				rightX += elementSideLength;
 			}
-			rightX = -1 + sideLength;
+			rightX = -1 + elementSideLength;
 			leftX = -1;
-			topY -= sideLength;
-			bottomY -= sideLength;
+			topY -= elementSideLength;
+			bottomY -= elementSideLength;
 		}
 
 	}
@@ -88,5 +78,9 @@ public class Square {
 
 	public ArrayList<Float> getSquareVertices(){
 		return vertices;
+	}
+
+	public int getElementsPerSide(){
+		return getElementsPerSide();
 	}
 }

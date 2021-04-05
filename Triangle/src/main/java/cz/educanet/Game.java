@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private static float[] vertices = new float[18*900];
+    private static float[] vertices = new float[18*900];;
     private static int triangleVaoId;
     private static int triangleVboId;
+    private static Square square = new Square();
 
-    public static void init() {
-        Square square = new Square();
+        public static void init() {
         int index = 0;
         for(Float element: square.getSquareVertices()){
             vertices[index++] = element;
