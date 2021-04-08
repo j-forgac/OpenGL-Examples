@@ -79,8 +79,4 @@ public class Square {
 	public ArrayList<Float> getSquareVertices(){
 		return vertices;
 	}
-
-	public int getElementsPerSide(){
-		return getElementsPerSide();
-	}
 }
